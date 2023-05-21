@@ -1,7 +1,7 @@
 #' Cellwise Robust M regression with additional input arguments
 #'
 #' Estimates coefficients by applying Cellwise Robust M regression
-#' @importFrom robustbase lmrob ltsreg Qn
+#' @importFrom robustbase lmrob ltsReg Qn
 #' @importFrom plyr ldply
 #' @importFrom stats coef delete.response lm median model.frame model.matrix qchisq qnorm sd terms weighted.mean
 #' @importFrom crmReg spadimo daprpr
