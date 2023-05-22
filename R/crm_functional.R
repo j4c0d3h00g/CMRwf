@@ -176,7 +176,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
     wr <- HuberWeightFunction(r, q)
   } else if (weightfunction == "andrews") {
     q <- parameters[1]
-    wr <- AndrewsWeightfunction(r, q = 1.339)
+    wr <- AndrewsWeightFunction(r, q)
   } else if (weightfunction == "gauss") {
     q <- parameters[1]
     a <- parameters[2]
@@ -240,7 +240,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
     wr <- HuberWeightFunction(r, q)
   } else if (weightfunction == "andrews") {
     q <- parameters[1]
-    wr <- AndrewsWeightfunction(r, q)
+    wr <- AndrewsWeightFunction(r, q)
   } else if (weightfunction == "gauss") {
     q <- parameters[1]
     a <- parameters[2]
@@ -297,7 +297,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
       wr <- HuberWeightFunction(r, q)
     } else if (weightfunction == "andrews") {
       q <- parameters[1]
-      wr <- AndrewsWeightfunction(r, q)
+      wr <- AndrewsWeightFunction(r, q)
     } else if (weightfunction == "gauss") {
       q <- parameters[1]
       a <- parameters[2]
@@ -358,7 +358,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
       wr <- HuberWeightFunction(r, q)
     } else if (weightfunction == "andrews") {
       q <- parameters[1]
-      wr <- AndrewsWeightfunction(r, q)
+      wr <- AndrewsWeightFunction(r, q)
     } else if (weightfunction == "gauss") {
       q <- parameters[1]
       a <- parameters[2]
