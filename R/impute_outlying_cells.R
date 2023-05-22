@@ -25,7 +25,7 @@ impute_outlying_cells <- function (outlier, data, outlvarz, az, wr, increment = 
                          query = matrix(modifiedrow, nrow = 1),
                          k = 2)$nn.index
   }
-  dataclean <- data[wr == 1, ][nn_index, ]
+  dataclean <- data[wr >= threshold, ][nn_index, ]
   imputeddataclean <- colMeans(as.matrix(dataclean[, sort(outlvars)]))
 
   modifiedrow[outlvars + increment] <- imputeddataclean
