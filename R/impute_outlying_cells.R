@@ -2,7 +2,7 @@
 #'
 #' @importFrom FNN get.knnx
 #' @export
-impute_outlying_cells <- function (outlier, data, outlvarz, az, wr, increment = 0) {
+impute_outlying_cells <- function (outlier, data, outlvarz, az, wr, increment = 0, threshold) {
 
   ## outlier .... index
   ## data  ...... must be a data frame
@@ -17,11 +17,11 @@ impute_outlying_cells <- function (outlier, data, outlvarz, az, wr, increment = 
   as <- az[[as.character(outlier)]]
   modifiedrow <- data[outlier, ]
   if (length(outlvars) < length(as)) {
-    nn_index <- get.knnx(data = as.matrix(data[wr == 1, -outlvars]),
+    nn_index <- get.knnx(data = as.matrix(data[wr >= threshold, -outlvars]),
                          query = matrix(modifiedrow[-outlvars], nrow = 1),
                          k = 2)$nn.index
   } else {
-    nn_index <- get.knnx(data = as.matrix(data[wr == 1, ]),
+    nn_index <- get.knnx(data = as.matrix(data[wr >= threshold, ]),
                          query = matrix(modifiedrow, nrow = 1),
                          k = 2)$nn.index
   }

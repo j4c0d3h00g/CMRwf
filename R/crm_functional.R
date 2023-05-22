@@ -213,7 +213,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
 
     ## Update imputed data matrix
     matz <- ldply(outliersx, impute_outlying_cells,
-                  data = datamc[, 2:nCol], outlvarz, az, wr, increment = 0)
+                  data = datamc[, 2:nCol], outlvarz, az, wr, increment = 0, threshold = weightthreshold)
     for (j in as.numeric(matz$.id)) {
       if (sum(az[[as.character(j)]] == 0) > 0) {
         datamc_imputed[j, 2:nCol] <- as.matrix(matz[matz$.id == j, -which(colnames(matz) == ".id")])
@@ -331,7 +331,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
 
       ## Update imputed data matrix
       matz <- ldply(outliersx, impute_outlying_cells,
-                    data = datamc_imputed[, 2:nCol], outlvarz, az, wr, increment = 0)
+                    data = datamc_imputed[, 2:nCol], outlvarz, az, wr, increment = 0, threshold = weightthreshold)
       for (j in as.numeric(matz$.id)) {
         if (sum(az[[as.character(j)]] == 0) > 0) {
           datamc_imputed[j, 2:nCol] <- as.matrix(matz[matz$.id == j, -which(colnames(matz) == ".id")])
