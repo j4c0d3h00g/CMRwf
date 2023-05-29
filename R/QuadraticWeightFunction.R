@@ -13,8 +13,8 @@ QuadraticWeightFunction <- function (x, q1, q2, s) {
 
   quadratic_weights <- x
   quadratic_weights[i1] <- 1
-  quadratic_weights[i2] <- 1 - (s / (2*q2)) * (((abs(x) - q1)^2) / abs(x))
-  quadratic_weights[i3] <- (1 / abs(x)) * (q1 + q2 - ((q2 * s) / 2) + (((s - 1) / q3) * (0.5*(xtilde^2) - q3*xtilde)))
+  quadratic_weights[i2] <- 1 - (s / (2*q2)) * (((abs(x[i2]) - q1)^2) / abs(x[i2]))
+  quadratic_weights[i3] <- (1 / abs(x[i3])) * (q1 + q2 - ((q2 * s) / 2) + (((s - 1) / q3) * (0.5*(xtilde^2) - q3*xtilde)))
   quadratic_weights[i4] <- 0
   return(as.numeric(quadratic_weights))
 }
