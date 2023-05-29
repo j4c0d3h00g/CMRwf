@@ -112,7 +112,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
   if ((weightfunction == "tukey" | weightfunction == "huber" | weightfunction == "andrews") & length(parameters) != 1) {
     stop("not a possible vector length for the parameters of this weight function")
   }
-  if ((weightfunction == "hampel" | weightfunction == "gauss") & length(parameters) != 3) {
+  if ((weightfunction == "hampel" | weightfunction == "gauss" | weightfunction == "quadratic") & length(parameters) != 3) {
     stop("not a possible vector length for the parameters of this weight function")
   }
   inputs <- list(formula = formula, maxiter = maxiter, tolerance = tolerance,
@@ -182,6 +182,11 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
     a <- parameters[2]
     b <- parameters[3]
     wr <- GaussWeightFunction(r, q, a, b)
+  } else if (weightfunction == "quadratic") {
+    q1 <- parameters[1]
+    q2 <- parameters[2]
+    s <- parameters[3]
+    wr <- QuadraticWeightFunction(r, q1, q2, s)
   }
   names(wr) <- 1:nRow
 
@@ -246,6 +251,11 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
     a <- parameters[2]
     b <- parameters[3]
     wr <- GaussWeightFunction(r, q, a, b)
+  } else if (weightfunction == "quadratic") {
+    q1 <- parameters[1]
+    q2 <- parameters[2]
+    s <- parameters[3]
+    wr <- QuadraticWeightFunction(r, q1, q2, s)
   }
   names(wr) <- 1:nRow
 
@@ -303,6 +313,11 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
       a <- parameters[2]
       b <- parameters[3]
       wr <- GaussWeightFunction(r, q, a, b)
+    } else if (weightfunction == "quadratic") {
+      q1 <- parameters[1]
+      q2 <- parameters[2]
+      s <- parameters[3]
+      wr <- QuadraticWeightFunction(r, q1, q2, s)
     }
     names(wr) <- 1:nRow
 
@@ -364,6 +379,11 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
       a <- parameters[2]
       b <- parameters[3]
       wr <- GaussWeightFunction(r, q, a, b)
+    } else if (weightfunction == "quadratic") {
+      q1 <- parameters[1]
+      q2 <- parameters[2]
+      s <- parameters[3]
+      wr <- QuadraticWeightFunction(r, q1, q2, s)
     }
     names(wr) <- 1:nRow
 
