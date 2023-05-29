@@ -4,7 +4,15 @@
 \alias{impute_outlying_cells}
 \title{Imputation of outlying cells}
 \usage{
-impute_outlying_cells(outlier, data, outlvarz, az, wr, increment = 0)
+impute_outlying_cells(
+  outlier,
+  data,
+  outlvarz,
+  az,
+  wr,
+  increment = 0,
+  threshold
+)
 }
 \description{
 Imputation of outlying cells
