@@ -14,6 +14,24 @@ impute_outlying_cells(
   threshold
 )
 }
+\arguments{
+\item{outlier}{index of the casewise outlier.}
+
+\item{data}{the data as a data frame.}
+
+\item{az}{output of SPADIMO.}
+
+\item{wr}{caseweights.}
+
+\item{increment}{the value by which an outlying cell is incremented (default is 0)}
+
+\item{threshold}{weight threshold where assigned weights lower than this threshold are classified as casewise outliers.}
+
+\item{outlvars}{variable names in which the outlier is outlying.}
+}
+\value{
+the row of the data matrix where some cells are imputed.
+}
 \description{
 Imputation of outlying cells
 }

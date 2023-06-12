@@ -1,5 +1,15 @@
 #' Imputation of outlying cells
 #'
+#' @param outlier index of the casewise outlier.
+#' @param data the data as a data frame.
+#' @param outlvars variable names in which the outlier is outlying.
+#' @param az output of SPADIMO.
+#' @param wr caseweights.
+#' @param increment the value by which an outlying cell is incremented (default is 0)
+#' @param threshold weight threshold where assigned weights lower than this threshold are classified as casewise outliers.
+#'
+#' @returns the row of the data matrix where some cells are imputed.
+#'
 #' @importFrom FNN get.knnx
 #' @export
 impute_outlying_cells <- function (outlier, data, outlvarz, az, wr, increment = 0, threshold) {
@@ -7,9 +17,10 @@ impute_outlying_cells <- function (outlier, data, outlvarz, az, wr, increment = 
   ## outlier .... index
   ## data  ...... must be a data frame
   ## outlvars ... variable names in which the outlier is outlying
-  ## as ......... output spadimo loadings
+  ## az ......... output spadimo loadings
   ## increment .. currently not used, set to zero
   ## wr ......... caseweights
+  ## threshold .. weight threshold where assigned weights lower than this threshold are classified as casewise outliers
 
   # require(FNN)
 

@@ -6,6 +6,12 @@
 \usage{
 scaleResidualsByMAD(residuals)
 }
+\arguments{
+\item{residuals}{the residuals.}
+}
+\value{
+the scaled residuals.
+}
 \description{
 Residual scaling
 }

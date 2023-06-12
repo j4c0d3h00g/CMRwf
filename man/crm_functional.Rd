@@ -22,6 +22,40 @@ crm_functional(
   parameters
 )
 }
+\arguments{
+\item{data}{the data as a data frame.}
+
+\item{maxiter}{maximum number of iterations (default is 100).}
+
+\item{tolerance}{obtain optimal regression coefficients to within a certain tolerance (default is 0.01).}
+
+\item{outlyingness.factor}{numeric value, larger or equal to 1 (default). Only cells are altered of cases for which the original outlyingness (before SPADIMO) is larger than outlyingness.factor * oulyingness AFTER SPADIMO. The larger this factor, the fewer cells are imputed.}
+
+\item{spadieta}{the sparsity parameter to start internal outlying cell detection with, must be in the range [0,1] (default is seq(0.9, 0.1, -0.1)).}
+
+\item{center}{how to center the data. A string that matches the R function to be used for centering (default is "median").}
+
+\item{scale}{how to scale the data. Choices are "no" (no scaling) or a string matching the R function to be used for scaling (default is "qn").}
+
+\item{regtype}{type of robust regression. Choices are "MM" (default) or "LTS".}
+
+\item{alphaLTS}{parameter used by LTS regression. The percentage (roughly) of squared residuals whose sum will be minimized (default is 0.5).}
+
+\item{seed}{initial seed for random generator, like .Random.seed (default is NULL).}
+
+\item{verbose}{should output be shown during the process (default is TRUE).}
+
+\item{weightfunction}{the weight function used in the M estimation step. (default is "hampel")}
+
+\item{weightthreshold}{weight threshold where assigned weights lower than this threshold are classified as casewise outliers. (default is 1)}
+
+\item{parameters}{parameters for the weight function.}
+
+\item{formalu}{an lm-style formula object specifying which relationship to estimate.}
+}
+\value{
+coefficients, fitted values, residuals, weights, casewise outliers, cellwise outliers, terms, call, inputs, number of iterations, and execution time.
+}
 \description{
-Estimates coefficients by applying Cellwise Robust M regression
+Estimates coefficients by applying Cellwise Robust M regression.
 }

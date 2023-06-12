@@ -7,7 +7,7 @@ Maintainer: Jaco de Hoog <jaco.hoog@gmail.com>
 Description: Cellwise Robust M regression with additional functionality by allowing more input arguments.
 Depends: R (>= 3.5.0)
 Imports: stats, plyr, robustbase, crmReg
-License: What license is it under?
+License: GPL (>= 2)
 LazyLoad: yes
 Encoding: UTF-8
 LazyData: false

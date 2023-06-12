@@ -1,4 +1,9 @@
 #' Residual scaling
+#'
+#' @param residuals the residuals.
+#'
+#' @returns the scaled residuals.
+#'
 #' @export
 scaleResidualsByMAD <- function (residuals) {
   if (length(residuals) / 2 > sum(residuals == 0)) {

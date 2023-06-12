@@ -1,6 +1,25 @@
 #' Cellwise Robust M regression with additional input arguments
 #'
-#' Estimates coefficients by applying Cellwise Robust M regression
+#' Estimates coefficients by applying Cellwise Robust M regression.
+#'
+#' @param formalu an lm-style formula object specifying which relationship to estimate.
+#' @param data the data as a data frame.
+#' @param maxiter maximum number of iterations (default is 100).
+#' @param tolerance obtain optimal regression coefficients to within a certain tolerance (default is 0.01).
+#' @param outlyingness.factor numeric value, larger or equal to 1 (default). Only cells are altered of cases for which the original outlyingness (before SPADIMO) is larger than outlyingness.factor * oulyingness AFTER SPADIMO. The larger this factor, the fewer cells are imputed.
+#' @param spadieta the sparsity parameter to start internal outlying cell detection with, must be in the range [0,1] (default is seq(0.9, 0.1, -0.1)).
+#' @param center how to center the data. A string that matches the R function to be used for centering (default is "median").
+#' @param scale how to scale the data. Choices are "no" (no scaling) or a string matching the R function to be used for scaling (default is "qn").
+#' @param regtype type of robust regression. Choices are "MM" (default) or "LTS".
+#' @param alphaLTS parameter used by LTS regression. The percentage (roughly) of squared residuals whose sum will be minimized (default is 0.5).
+#' @param seed initial seed for random generator, like .Random.seed (default is NULL).
+#' @param verbose should output be shown during the process (default is TRUE).
+#' @param weightfunction the weight function used in the M estimation step. (default is "hampel")
+#' @param weightthreshold weight threshold where assigned weights lower than this threshold are classified as casewise outliers. (default is 1)
+#' @param parameters parameters for the weight function.
+#'
+#' @returns coefficients, fitted values, residuals, weights, casewise outliers, cellwise outliers, terms, call, inputs, number of iterations, and execution time.
+#'
 #' @importFrom robustbase lmrob ltsReg Qn
 #' @importFrom plyr ldply
 #' @importFrom stats coef delete.response lm median model.frame model.matrix qchisq qnorm sd terms weighted.mean
@@ -35,10 +54,10 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
   #                         squared residuals whose sum will be minimized (default is 0.5).
   #   seed      (optional)  initial seed for random generator, like .Random.seed
   #   verbose   (optional)  should output be shown during the process (default is TRUE).
-  #   weightfunction (optional) the weight function used in M estimation.
-  #   weighttheshold (optional) weightthreshold where assigned weights lower than this threshold
-  #                             are classified as casewise outliers.
-  #   parameters            parameters of the weight function.
+  #   weightfunction (optional) the weight function used in the M estimation step. (default is "hampel")
+  #   weighttheshold (optional) weight threshold where assigned weights lower than this threshold
+  #                             are classified as casewise outliers. (default is 1)
+  #   parameters            parameters for the weight function.
   #
   # -----------------------------------------------------------------------------------------------
   # Output: A list object of class "crm" containing the following elements:
@@ -56,9 +75,6 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
   #   numloops              the number of iterations.
   #   time                  the number of seconds passed to execute the CRM algorithm.
   #
-  # -----------------------------------------------------------------------------------------------
-  #   Written by S. Serneels, BASF Corp. and S. Höppner, KU Leuven, Aug-Nov 2017.
-  #   Modified by I. Ortner July (2018) and S. Höppner (2019)
   # -----------------------------------------------------------------------------------------------
 
 
@@ -108,6 +124,10 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
   }
   if (class(verbose) != "logical") {
     stop("argument 'verbose' must be TRUE or FALSE")
+  }
+  if (weightfunction != "hampel" | weightfunction != "tukey" | weightfunction != "huber" | weightfunction != "andrews" |
+      weightfunction != "gauss" | weightfunction != "quadratic") {
+    stop("not a valid weight function")
   }
   if ((weightfunction == "tukey" | weightfunction == "huber" | weightfunction == "andrews") & length(parameters) != 1) {
     stop("not a possible vector length for the parameters of this weight function")
