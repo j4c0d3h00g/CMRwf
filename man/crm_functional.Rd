@@ -84,7 +84,7 @@ returns a vector of regression coefficients that is robust against vertical outl
 \insertRef{filzmoser2020cellwise}{CRMwf}
 }
 \seealso{
-[crmReg::spadimo()], [crmReg::predict.crm], [crmReg::cellwiseheatmap], [crmReg::daprpr]
+\link[crmReg]{spadimo}, \link[crmReg]{predict.crm}, \link[crmReg]{cellwiseheatmap}, \link[crmReg]{daprpr}
 }
 \author{
 Jaco de Hoog

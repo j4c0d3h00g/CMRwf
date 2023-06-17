@@ -42,7 +42,7 @@
 #'
 #' @author Jaco de Hoog
 #' @references \insertRef{filzmoser2020cellwise}{CRMwf}
-#' @seealso [crmReg::spadimo()], [crmReg::predict.crm], [crmReg::cellwiseheatmap], [crmReg::daprpr]
+#' @seealso \link[crmReg]{spadimo}, \link[crmReg]{predict.crm}, \link[crmReg]{cellwiseheatmap}, \link[crmReg]{daprpr}
 #'
 #' @importFrom robustbase lmrob ltsReg Qn
 #' @importFrom plyr ldply
