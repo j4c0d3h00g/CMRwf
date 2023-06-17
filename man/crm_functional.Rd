@@ -54,8 +54,38 @@ crm_functional(
 \item{formalu}{an lm-style formula object specifying which relationship to estimate.}
 }
 \value{
-coefficients, fitted values, residuals, weights, casewise outliers, cellwise outliers, terms, call, inputs, number of iterations, and execution time.
+`crm_functional` returns a list object of class "`crm`" containing the following elements:
+\itemize{
+ \item{coefficients}{a named vector of fitted coefficients.}
+ \item{fitted.values}{the fitted response values.}
+ \item{residual}{the residuals, that is response minus fitted values.}
+ \item{weights}{the (case) weights of the residuals.}
+ \item{data.imputed}{the data as imputed by CRM.}
+ \item{casewiseoutliers}{a vector that indicates the casewise outliers with `TRUE` or `FALSE`}
+ \item{cellwiseoutliers}{a matrix that indicates the cellwise outliers as the (scaled) difference between
+ the original data and imputed data, both scaled and centered.}
+ \item{terms}{the terms object used.}
+ \item{call}{the matched call.}
+ \item{inputs}{the list of supplied input arguments.}
+ \item{numloops}{the number of iterations.}
+ \item{time}{the number of seconds passed to execute the CRM algorithm.}
+}
 }
 \description{
-Estimates coefficients by applying Cellwise Robust M regression.
+Estimates coefficients by applying Cellwise Robust M (CRM) regression.
+}
+\details{
+This function can be used as an alternative to the `crm` function of the `crmReg` package. In our function
+`crm_functional` it is possible to assign additional input arguments, such that the weight function and its parameters
+can be varied. This function performs the cellwise robust M (CRM) regression algorithm (Filzmoser et al., 2020) and
+returns a vector of regression coefficients that is robust against vertical outliers and leverage points.
+}
+\references{
+\insertRef{filzmoser2020cellwise}{CRMwf}
+}
+\seealso{
+[crmReg::spadimo()], [crmReg::predict.crm], [crmReg::cellwiseheatmap], [crmReg::daprpr]
+}
+\author{
+Jaco de Hoog
 }

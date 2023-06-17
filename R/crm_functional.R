@@ -1,6 +1,6 @@
 #' Cellwise Robust M regression with additional input arguments
 #'
-#' Estimates coefficients by applying Cellwise Robust M regression.
+#' @description Estimates coefficients by applying Cellwise Robust M (CRM) regression.
 #'
 #' @param formalu an lm-style formula object specifying which relationship to estimate.
 #' @param data the data as a data frame.
@@ -18,12 +18,37 @@
 #' @param weightthreshold weight threshold where assigned weights lower than this threshold are classified as casewise outliers. (default is 1)
 #' @param parameters parameters for the weight function.
 #'
-#' @returns coefficients, fitted values, residuals, weights, casewise outliers, cellwise outliers, terms, call, inputs, number of iterations, and execution time.
+#' @details This function can be used as an alternative to the `crm` function of the `crmReg` package. In our function
+#' `crm_functional` it is possible to assign additional input arguments, such that the weight function and its parameters
+#' can be varied. This function performs the cellwise robust M (CRM) regression algorithm (Filzmoser et al., 2020) and
+#' returns a vector of regression coefficients that is robust against vertical outliers and leverage points.
+#'
+#' @returns `crm_functional` returns a list object of class "`crm`" containing the following elements:
+#' \itemize{
+#'  \item{coefficients}{a named vector of fitted coefficients.}
+#'  \item{fitted.values}{the fitted response values.}
+#'  \item{residual}{the residuals, that is response minus fitted values.}
+#'  \item{weights}{the (case) weights of the residuals.}
+#'  \item{data.imputed}{the data as imputed by CRM.}
+#'  \item{casewiseoutliers}{a vector that indicates the casewise outliers with `TRUE` or `FALSE`}
+#'  \item{cellwiseoutliers}{a matrix that indicates the cellwise outliers as the (scaled) difference between
+#'  the original data and imputed data, both scaled and centered.}
+#'  \item{terms}{the terms object used.}
+#'  \item{call}{the matched call.}
+#'  \item{inputs}{the list of supplied input arguments.}
+#'  \item{numloops}{the number of iterations.}
+#'  \item{time}{the number of seconds passed to execute the CRM algorithm.}
+#' }
+#'
+#' @author Jaco de Hoog
+#' @references \insertRef{filzmoser2020cellwise}{CRMwf}
+#' @seealso [crmReg::spadimo()], [crmReg::predict.crm], [crmReg::cellwiseheatmap], [crmReg::daprpr]
 #'
 #' @importFrom robustbase lmrob ltsReg Qn
 #' @importFrom plyr ldply
 #' @importFrom stats coef delete.response lm median model.frame model.matrix qchisq qnorm sd terms weighted.mean
 #' @importFrom crmReg spadimo daprpr
+#' @importFrom Rdpack reprompt
 #' @export
 crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outlyingness.factor = 1,
                             spadieta = seq(0.9, 0.1, -0.1), center = "median", scale = "qn",
