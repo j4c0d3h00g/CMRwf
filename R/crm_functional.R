@@ -150,8 +150,8 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
   if (class(verbose) != "logical") {
     stop("argument 'verbose' must be TRUE or FALSE")
   }
-  if (weightfunction != "hampel" | weightfunction != "tukey" | weightfunction != "huber" | weightfunction != "andrews" |
-      weightfunction != "gauss" | weightfunction != "quadratic") {
+  if (weightfunction != "hampel" & weightfunction != "tukey" & weightfunction != "huber" & weightfunction != "andrews" &
+      weightfunction != "gauss" & weightfunction != "quadratic") {
     stop("not a valid weight function")
   }
   if ((weightfunction == "tukey" | weightfunction == "huber" | weightfunction == "andrews") & length(parameters) != 1) {
