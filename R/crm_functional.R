@@ -241,7 +241,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
 
   if (any(wr < 1)) {
     if (verbose) {cat(" - Apply SPADIMO to find outlying cells...\n")}
-    outliers <- as.list(which(wr < weightthreshold)) # casewise outliers in X-space (i.e. cases with wr[i] < 1)
+    outliers <- as.list(which(wr < weightthreshold)) # casewise outliers in X-space (i.e. cases with wr[i] < weight threshold)
     suppressWarnings(
       outlvars <- lapply(outliers, function (x) {spadimo(data = datamc[, 2:nCol],
                                                          weights = wr, obs = x,
@@ -369,7 +369,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
 
     ## Find cells contributing to outlyingness
     if (any(wr < 1)) {
-      outliers <- as.list(which(wr < weightthreshold)) # casewise outliers in X-space (i.e. cases with wr[i] < 1)
+      outliers <- as.list(which(wr < weightthreshold)) # casewise outliers in X-space (i.e. cases with wr[i] < weight threshold)
       suppressWarnings(
         outlvars <- lapply(outliers, function (x) spadimo(data = datamc_imputed[, 2:nCol],
                                                           weights = wr, obs = x,
@@ -400,7 +400,7 @@ crm_functional <- function (formula, data, maxiter = 100, tolerance = 0.01, outl
     }
 
 
-    ## Update residuals and derive case weights with Hample weight function
+    ## Update residuals and derive case weights with weight function
     fitted_values <- datamc_imputed[, -1] %*% matrix(betas, ncol = 1) + intercept
     r <- datamc_imputed[, 1] - fitted_values
     r <- scaleResidualsByMAD(r)
