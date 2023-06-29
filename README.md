@@ -6,7 +6,7 @@ The R package `CRMwf` contains the implementation of the Cellwise Robust M-regre
 - The Hampel weight function (`HampelWeightFunction.R`)
 - The Tukey's bisquare weight function (`TukeyWeightFunction.R`)
 - The Huber weight function (`HuberWeightFunction.R`)
-- The Andrews-Sine weight function (`AndrewsWeightFunction.R`)
+- The Andrews-sine weight function (`AndrewsWeightFunction.R`)
 - The Generalized Gauss weight function (`GaussWeightFunction.R`)
 - The linear quadratic quadratic weight function (`QuadraticWeightFunction.R`)
 
